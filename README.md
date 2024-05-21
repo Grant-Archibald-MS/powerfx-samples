@@ -1,2 +1,3 @@
-# powerfx-samples
-Sample repository that shows how to how to 
+# Powerfx Samples
+
+Small samples that demonstrate concepts using Power Fx
