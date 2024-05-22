@@ -6,15 +6,17 @@ using Microsoft.PowerFx;
 using Microsoft.PowerFx.Types;
 
 /// <summary>
-/// Parse a string template evaluting tokens with variables and PowerFX expressions
+/// Parse a string template evaluating tokens with variables and PowerFX expressions
 /// </summary>
 public class PowerFxParser
 {
     private RecalcEngine _engine;
+    private ReadOnlySymbolValues _symbolValues;
 
-    public PowerFxParser(RecalcEngine engine)
+    public PowerFxParser(RecalcEngine engine, ReadOnlySymbolValues symbolValues)
     {
         _engine = engine;
+        _symbolValues = symbolValues;
     }
 
     public string Parse(string input)
@@ -28,8 +30,7 @@ public class PowerFxParser
             string token = match.Groups[1].Value;
 
              if ( token.StartsWith("=")) {
-                var evalResult = _engine.Eval(token.Substring(1));
-                Console.WriteLine(evalResult.ToString());
+                var evalResult = _engine.EvalAsync(token.Substring(1), default, _symbolValues).Result;
                 if ( evalResult is StringValue ) {
                     return (evalResult as StringValue).Value;
                 }
@@ -37,8 +38,11 @@ public class PowerFxParser
                     // TODO handle format?
                     return (evalResult as DateTimeValue).Value.ToString();
                 }
-                // TODO hande other types
-                return "Unknown";
+                if ( evalResult is BlankValue ) {
+                    return "";
+                }
+                // TODO handle other types
+                return $"Unknown type {evalResult.GetType()}";
             }
 
             var value = _engine.GetValue(token);
