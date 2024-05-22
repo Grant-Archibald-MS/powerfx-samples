@@ -1,10 +1,12 @@
 ﻿using Microsoft.PowerFx;
 using Microsoft.PowerFx.Types;
 
-string input = "This is a {test} string with {multiple} tokens.\nWith :\n{Users}\n{=Now()}";
+string input = "This is a {test} string with {multiple} tokens.\nWith :\n{Users}\n{=Now()}\n{=Custom(\"Hello\")}";
 
 var config = new PowerFxConfig();
 config.SymbolTable.EnableMutationFunctions();
+
+config.AddFunction(new CustomFunction(new CustomState { Name = "World" }));
 
 config.EnableSetFunction();
 var engine = new RecalcEngine(config);
