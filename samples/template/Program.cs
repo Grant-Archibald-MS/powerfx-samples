@@ -35,6 +35,10 @@ config.AddFunction(new CustomFunction(new CustomState { Name = "World" }));
 config.EnableSetFunction();
 var engine = new RecalcEngine(config);
 
+// the below line is optional, but will enable delegation for the specified functions,
+// so that they are evaluated in Dataverse instead of in the client. And it will fetch max 1000 rows.
+engine.EnableDelegation(maxRows: 1000);
+
 var recordType = RecordType.Empty()
         .Add(new NamedFormulaType("Name", FormulaType.String, displayName: "Name"))
         .Add(new NamedFormulaType("Value", FormulaType.Number, displayName: "Value"));
