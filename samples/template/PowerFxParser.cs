@@ -30,6 +30,8 @@ public class PowerFxParser
             string token = match.Groups[1].Value;
 
              if ( token.StartsWith("=")) {
+                //TODO: Handle unknown variables (See example from Repl https://github.com/microsoft/Power-Fx/blob/main/src/libraries/Microsoft.PowerFx.Repl/Repl.cs)
+
                 var evalResult = _engine.EvalAsync(token.Substring(1), default, _symbolValues).Result;
                 if ( evalResult is StringValue ) {
                     return (evalResult as StringValue).Value;

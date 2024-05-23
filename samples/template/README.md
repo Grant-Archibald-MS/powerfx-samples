@@ -5,9 +5,11 @@ This sample is designed to show how Power FX and be used as a simple string temp
 - Replace variables enclosed in {}. For example {name} which will be replaced with the value of the variable name
 - How to handle different Power FX types for example. **StringValue** or **NumberValue**
 - Be an example of how to process more complicated type like **TableValue** or **RecordValue** to convert the text. This could be a starting point to consider converting this to markdown. For example convert table to a Markdown Table
+- Call Power FX expressions enclosed in {= Your Expression}. For example string operators {="Hello" & " " & "World"}
 - Call inbuilt functions like **Now()**
-- Call custom Power FX functions
-- Query dataverse tables
+- Create custom Power FX functions using C#
+- Call custom functions
+- Use dataverse tables
 
 ## Prerequisites for building module
 
@@ -19,7 +21,7 @@ This sample is designed to show how Power FX and be used as a simple string temp
 
 1. Add you connection string to config.dev.json. More information on connection strings is available in [Use Connection Strings](https://learn.microsoft.com/power-apps/developer/data-platform/xrm-tooling/use-connection-strings-xrm-tooling-connect)
 
-2. Setup any required Dataverse permissions to unable your selected connection to read from the [Account](https://learn.microsoft.com/power-apps/developer/data-platform/reference/entities/account) table.
+2. Setup any required Entra and Dataverse permissions to unable your selected connection to read from the [Account](https://learn.microsoft.com/power-apps/developer/data-platform/reference/entities/account) table.
 
 3. Run the sample
 
